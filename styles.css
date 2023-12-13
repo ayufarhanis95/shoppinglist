@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Hedvig+Letters+Serif:opsz@12..24&display=swap');
+html, body {
+    font-family: 'Hedvig Letters Serif', serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    background-color: rgb(253, 234, 255);
+    font-size: 25px;
+    color: rgb(61, 9, 18);
+    height: 100vh;
+    user-select: none;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+input {
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid rgb(253, 234, 255);
+    font-size: 1rem;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    min-width: 200px;
+}
+
+button {
+    color: rgb(61, 9, 18);
+    background-color: rgb(223, 122, 135);
+    border-radius: 10px;
+    border: 2px solid rgb(253, 234, 255);
+    padding: 10px;
+    font-size: 1rem;
+    min-width: 350px;
+}
+
+button:hover {
+    background-color: rgb(165, 88, 98);
+    cursor: pointer;
+}
+img {
+    max-width: 500px;
+}
+
+ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px
+}
+ul li {
+    list-style-type: none;
+    border: 2px solid rgb(253, 234, 255);
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+li:hover {
+    background-color: rgb(219, 175, 181);
+    cursor: pointer;
+}

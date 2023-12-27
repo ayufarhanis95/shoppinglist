@@ -2,7 +2,7 @@
 // link to firebase database
 
 import {initializeApp} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"
-import {getDatabase,ref,push,onValue} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
+import {getDatabase,ref,push,onValue,remove} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
 
 const appSettings = {
     databaseURL: "https://realtime-database-6317a-default-rtdb.asia-southeast1.firebasedatabase.app/"
@@ -24,17 +24,40 @@ addBtn.addEventListener("click", function() {
 
 // obtaining information from database to be inside the shopping list
 onValue(shoppingListInDB,function(snapshot){
-    let shoppingArray = Object.values(snapshot.val())
-    shoppingListEl.innerHTML = ""
-    // put the <li>array[0]<li> into the <ul>
-    for (let i = 0; i < shoppingArray.length; i++) {
-        shoppingListEl.innerHTML += `<li>${shoppingArray[i]}</li>`
+    
+
+    if (snapshot.exists()) {
+        let shoppingArray = Object.entries(snapshot.val())
+        shoppingListEl.innerHTML = ""
+        // put the <li>array[0]<li> into the <ul>
+        for (let i = 0; i < shoppingArray.length; i++) {
+            // shoppingListEl.innerHTML += `<li>${shoppingArray[i]}</li>`
+            // replaced by adding another function that can be deleted after clicked
+            let currentItem = shoppingArray[i]
+            appendItemToShoppingList(currentItem)
+        } 
+    } else {
+        shoppingListEl.innerHTML = "No items here ... yet"
     }
+    
  
 
 } )
 
 // deleting the list after being clicked
+function appendItemToShoppingList(item) {
+    let itemId = item[0]
+    let itemValue = item[1]
+    let newEl = document.createElement("li") //creates a <li></li> element
+    newEl.textContent = itemValue //adding item inside the element
+
+    newEl.addEventListener("click", function(){
+        let exactLocationOfShoppingListInDB = ref(database,`shoppingListApp/${itemId}`)
+
+        remove(exactLocationOfShoppingListInDB)
+    })
+    shoppingListEl.append(newEl) //adding the new element into the ul
+}
 
 
 
